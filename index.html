@@ -559,7 +559,7 @@
   }
 
   function drawTankEntity(t) {
-    if (t.dead) return;
+    if (!t || t.dead) return;
     if (t.spawnTimer > 0) { drawSpawn(t.x + TANK / 2, t.y + TANK / 2, t.spawnTimer); return; }
     const blink = t.invincible > 0 && Math.floor(time * 10) % 2 === 0;
     ctx.save();
@@ -711,6 +711,7 @@
 
   // ---- loop ----
   resetGrid();
+  playerSpawn();
   let last = performance.now();
   function loop(now) {
     const dt = Math.min((now - last) / 1000, 0.05);
